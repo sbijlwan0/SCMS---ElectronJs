@@ -1,0 +1,64 @@
+{
+  "name": "scms",
+  "version": "1.0.0",
+  "description": "sunil credential management app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "node": {
+    "__dirname": false
+  },
+  "build": {
+    "appId": "org.develar.onshape",
+    "extends": null,
+    "files": [
+      "./static/**/*",
+      "./main.js",
+      "./Install.png"
+    ],
+    "mac": {
+      "category": "utility"
+    },
+    "nsis": {
+      "createDesktopShortcut": "always"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target":[
+        "AppImage",
+        "snap"
+      ],
+      "category": "Utility",
+      "icon": "./Install.png"
+    }
+  },
+  "author": "sunil bijalwan",
+  "email":  "sbijlwan0@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.2",
+    "electron-builder": "^21.2.0",
+    "electron-rebuild": "^1.8.8"
+  },
+  "dependencies": {
+    "sqlite3": "^4.1.0"
+  }
+}

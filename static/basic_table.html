@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+
+
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="description" content="Responsive Admin Template" />
+    <meta name="author" content="SmartUniversity" />
+
+    <script type="text/javascript" >
+   function preventBack(){window.history.forward();}
+    setTimeout("preventBack()", 0);
+    window.onunload=function(){null};
+</script>
+
+
+    <title>Sunil Credential Management System</title>
+    <!-- google font -->
+    <!-- <link rel="stylesheet" href="js/ng-tags-input.min.css" /> -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+	<!-- icons -->
+    <link href="assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="assets/plugins/iconic/css/material-design-iconic-font.min.css">
+	<!--bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+
+    <!-- Material Design Lite CSS -->
+	<link rel="stylesheet" href="assets/plugins/material/material.min.css">
+	<link rel="stylesheet" href="assets/css/material_style.css">
+
+
+
+	<!-- animation -->
+	<link href="assets/css/pages/animate_page.css" rel="stylesheet">
+	<!-- Template Styles -->
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/theme-color.css" rel="stylesheet" type="text/css" />
+
+	<link href="assets/plugins/dropzone/dropzone.css" rel="stylesheet" media="screen">
+	<!-- Date Time item CSS -->
+    <link rel="stylesheet" href="assets/plugins/material-datetimepicker/bootstrap-material-datetimepicker.css" />
+
+    <!-- data tables -->
+    <link href="assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+
+	<!-- favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <style type="text/css"></style>
+
+
+
+</head>
+
+<!-- END HEAD -->
+<body ng-app="spms" ng-controller="dataCtrl" class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md ng-scope  header-blue logo-white blue-sidebar-color">
+    <div class="page-wrapper">
+
+        <!-- start page container -->
+        <div class="page-container">
+ 
+			<!-- start page content -->
+        
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-topline-purple">
+                                        <div class="card-head">
+											<header>SCMS</header>
+											
+                                            <div class="tools">
+													<span ng-bind="msg"></span>
+													<button type="button" class="label label-info label-mini" data-toggle="modal" data-target="#addNew" ng-click="data={}">Add New</button>
+													<a href="index.html"><span class="label label-danger label-mini">Log Out</span></a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body ">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped custom-table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Username</th>
+                                                        <th>Password</th>
+                                                        <!-- <th>Length</th> -->
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="pass in passes">
+                                                        <td ng-bind="pass.title" ng-click="open(pass.title)">
+                                                        </td>
+                                                        <td><span ng-bind="pass.username"></span><span class="fa fa-copy" title="copy" ng-click="copy(pass.username)" style="padding-left:8px;"></span></td>
+                                                        <td><input type="password" id="{{pass.id}}" ng-model="pass.password" disabled>
+                                                            <span class="fa fa-eye" ng-show="checkPassword(pass.id)" ng-click="viewPassword(pass.id)"></span>
+                                                            <span class="fa fa-eye-slash" ng-hide="checkPassword(pass.id)" ng-click="viewPassword(pass.id)"></span>
+                                                            <span class="fa fa-copy" title="copy" ng-click="copy(pass.password)"></span>
+                                                        </td>
+                                                        <!-- <td>
+                                                            <div class="progress progress-striped progress-xs">
+																	<div ng-show="pass.password.length>8"aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar progress-bar-success width-80"></div>
+																	<div ng-show="pass.password.length>6"aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" role="progressbar" class="progress-bar progress-bar-info width-75"></div>
+																	<div ng-show="pass.password.length>0" ng-hide="pass.password.length>7"aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-warning width-60"></div>
+																	<div ng-show="('true'?pass.password.length<=4)" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-danger width-40"></div>
+                                                            
+                                                            </div>
+                                                        </td> -->
+                                                        <td >
+                                                            <!-- <button class="btn btn-success btn-xs">
+                                                                <i class="fa fa-check"></i>
+                                                            </button> -->
+                                                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addNew" ng-click="edit(pass)">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </button>
+                                                            <button class="btn btn-danger btn-xs" ng-click="remove(pass.id)">
+                                                                <i class="fa fa-trash-o "></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr ng-if="passes.length==0">
+                                                            <td colspan="5"><h4 align="center">No Credentials Added!</h4></td>
+                                                          </tr>
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end page content -->
+          <!-- Add New modal-->
+					<div id="addNew" class="modal fade" role="dialog">	
+							<div class="modal-dialog">
+						<div class="modal-content" style="position:absolute; overflow-y:scroll;">	
+							<div class="modal-header">
+							  <h3 class="modal-title">Add New Credential</h3>
+							</div>
+							<div class="modal-body">
+	<h4 style="color: green" ng-show="smsg" ng-bind="smsg"></h4>
+    <h4 style="color: red" ng-show="errmsg" ng-bind="errmsg"></h4>
+    <form >
+
+			<div class="form-group has-feedback col-md-12">
+					<span style="font-weigth:600;">Title</span>
+					  <input style="font-weight:700;" type="text" ng-model="data.title" class="form-control" placeholder="Title">
+			  
+			  
+					</div>
+
+      <div class="form-group has-feedback col-md-12">
+      <span style="font-weigth:600;">Username</span>
+        <input style="font-weight:700;" type="text" ng-model="data.username" class="form-control" placeholder="Username">
+
+
+      </div>
+
+      <div class="form-group has-feedback col-md-12" >
+	  <span style="font-weigth:600;">Password</span>
+	  <input style="font-weight:700;position:reative;" id="paswrd" type="password" ng-model="data.password" class="form-control" placeholder="Password" >
+        <span style="position:absolute;right:25px;top:33px;" class="fa fa-eye" ng-show="eye" ng-click="viewPassword('paswrd')"></span>
+        <span style="position:absolute;right:25px;top:33px;" class="fa fa-eye-slash" ng-hide="eye" ng-click="viewPassword('paswrd')"></span>
+       </div>
+							<div class="modal-footer">
+							  <button class="btn btn-primary" type="button"  ng-click="addNew()">Ok</button>
+							  <button class="btn btn-warning" type="button" data-dismiss="modal" >Cancel</button>
+							  </div>
+							</div>
+							</div>
+							</div>
+							
+							<!-- Add New models -->
+
+        </div>
+<!-- style -->
+<link rel="stylesheet" href="assets/css/pages/extra_pages.css">
+<!-- loader div start -->
+	<div id="loader" style="visibility:hidden">
+		<div  style="position: absolute;left: 40%;top: 25%;z-index: 5;">
+			<img src="images/loader.gif" alt=""/>
+		</div>
+		<!-- overlay div -->
+		<div style="position : fixed; background-color: #b5d49e; opacity: 0.3; width:100%; height:100%; z-index: 4;left: 0;top: 0; ">
+		</div>
+	</div>
+
+	<!-- loader div close -->
+
+
+       <!-- start js include path -->
+    <script src="assets/plugins/jquery/jquery.min.js" ></script>
+    <script src="assets/plugins/popper/popper.min.js" ></script>
+    <script src="assets/plugins/jquery-blockui/jquery.blockui.min.js" ></script>
+	<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- bootstrap -->
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" ></script>
+<!-- 	<script src="assets/js/pages/extra_pages/login.js" ></script> -->
+    <!-- Common js-->
+	<script src="assets/js/app.js" ></script>
+    <script src="assets/js/layout.js" ></script>
+	<script src="assets/js/theme-color.js" ></script>
+	<!-- Material -->
+	<script src="assets/plugins/material/material.min.js"></script>
+	<!-- <script src="assets/js/pages/material_select/getmdl-select.js" ></script> -->
+	 <!-- <script  src="assets/plugins/material-datetimepicker/moment-with-locales.min.js"></script> -->
+ <!-- <script  src="assets/plugins/material-datetimepicker/bootstrap-material-datetimepicker.js"></script> -->
+ <!-- <script  src="assets/plugins/material-datetimepicker/datetimepicker.js"></script> -->
+	<!-- dropzone -->
+	<!-- <script src="assets/plugins/dropzone/dropzone.js" ></script> -->
+    <!-- <script src="assets/plugins/dropzone/dropzone-call.js" ></script> -->
+	<!-- animation -->
+	<script src="assets/js/pages/ui/animations.js" ></script>
+<script src="js/lib.js"></script>
+<!-- data tables -->
+    <script src="assets/plugins/datatables/jquery.dataTables.min.js" ></script>
+ 	<script src="assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js" ></script>
+
+
+ 	     <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDgHvyj4S2TyFw8ya5XklmOlju61ZuwjqM"></script> -->
+ 	    <!-- <script src="assets/ng-map.min.js"></script> -->
+ 	    <!-- <script type="text/javascript" src="https://cdn.rawgit.com/wpalahnuk/ngAutocomplete/master/src/ngAutocomplete.js"></script> -->
+
+ 	    <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script> -->
+
+
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+ 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script> -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.js"></script>
+
+  <!-- end js include path -->
+  </body>
+ </html>
